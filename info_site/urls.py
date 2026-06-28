@@ -17,7 +17,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from crypto.admin_auth import admin_logout_view
+
 urlpatterns = [
+    path("admin/logout/", admin_logout_view, name="admin_logout"),
     path('admin/', admin.site.urls),
     path('', include('crypto.urls')),
 ]
+
+from django.conf import settings
+from django.conf.urls.static import static
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])

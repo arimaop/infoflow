@@ -1,0 +1,150 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static jazzmin %}
+{% get_jazzmin_ui_tweaks as jazzmin_ui %}
+
+{% block bodyclass %}{{ block.super }} dashboard{% endblock %}
+
+{% block content_title %}Панель управления{% endblock %}
+
+{% block breadcrumbs %}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'admin:index' %}">Главная</a></li>
+        <li class="breadcrumb-item">Панель управления</li>
+    </ol>
+{% endblock %}
+
+{% block content %}
+    {% get_side_menu using="app_list" as dashboard_list %}
+    {% if dashboard_list %}
+        {% widthratio dashboard_list|length 2 1 as middle %}
+    {% endif %}
+
+    <div class="col-lg-9 col-12">
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                {% for app in dashboard_list %}
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h5 class="m-0">{{ app.name }}</h5>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-sm dashboard-model-table">
+                                <tbody>
+                                {% for model in app.models %}
+                                    <tr>
+                                        <td>
+                                            {% if model.url %}
+                                                <a href="{{ model.url }}">{{ model.name }}</a>
+                                            {% else %}
+                                                {{ model.name }}
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <div class="btn-group float-end dashboard-model-actions">
+                                                {% if model.add_url %}
+                                                    <a href="{{ model.add_url }}" class="btn btn-sm {{ jazzmin_ui.button_classes.success }} addlink">Добавить</a>
+                                                {% endif %}
+                                                {% if model.url %}
+                                                    {% if model.view_only %}
+                                                        <a href="{{ model.url }}" class="btn btn-sm {{ jazzmin_ui.button_classes.info }} viewlink">Открыть</a>
+                                                    {% else %}
+                                                        <a href="{{ model.url }}" class="btn btn-sm {{ jazzmin_ui.button_classes.info }} changelink">
+                                                            {% if model.custom %}Перейти{% else %}Список{% endif %}
+                                                        </a>
+                                                    {% endif %}
+                                                {% endif %}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    {% if forloop.counter == middle|add:"0" %}
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                    {% endif %}
+
+                {% endfor %}
+                </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-12">
+        <div id="content-related">
+            <div class="module" id="recent-actions-module">
+                <div class="recent-actions-header">
+                    <h4 class="mb-0">Последние действия</h4>
+                    <form method="post" action="{% url 'admin:clear_log' %}" class="clear-log-form">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-sm btn-danger" title="Удалить историю ваших действий">
+                            Очистить
+                        </button>
+                    </form>
+                </div>
+
+                <p class="recent-actions-hint">
+                    Значки слева — это <strong>метки типа действия</strong>, не кнопки:
+                    <span class="legend-item legend-add">+ добавление</span>,
+                    <span class="legend-item legend-edit">изменение</span>,
+                    <span class="legend-item legend-delete">удаление</span>.
+                    Перейти к записи можно по её названию (если она ещё существует).
+                </p>
+
+                {% load log %}
+                {% get_admin_log 6 as admin_log for_user user %}
+                {% if not admin_log %}
+                    <p class="recent-actions-empty">История пуста.</p>
+                {% else %}
+                    <div class="timeline recent-actions-timeline">
+                        {% for entry in admin_log %}
+                            <div class="timeline-entry">
+                                {% if entry.is_change %}
+                                    <i class="fas fa-edit bg-gray text-xs timeline-marker" title="Изменение" aria-hidden="true"></i>
+                                {% elif entry.is_deletion %}
+                                    <i class="fas fa-trash bg-danger text-xs timeline-marker" title="Удаление" aria-hidden="true"></i>
+                                {% elif entry.is_addition %}
+                                    <i class="fas fa-plus-circle bg-success text-xs timeline-marker" title="Добавление" aria-hidden="true"></i>
+                                {% endif %}
+
+                                <div class="timeline-item">
+                                    <span class="time">
+                                        <i class="fas fa-clock" aria-hidden="true"></i>
+                                        {{ entry.action_time|timesince }} назад
+                                    </span>
+                                    <h3 class="timeline-header no-border">
+                                        {% if entry.is_deletion or not entry.get_admin_url %}
+                                            {{ entry.object_repr }}
+                                        {% else %}
+                                            <a href="{{ entry.get_admin_url }}">{{ entry.object_repr }}</a>
+                                        {% endif %}
+
+                                        {% if entry.model %}
+                                            <span class="mini quiet">{{ entry.model|capfirst }}</span>
+                                        {% endif %}
+                                    </h3>
+                                    {% if not entry.is_deletion %}
+                                        <div class="timeline-body">
+                                            {% if entry.is_addition %}
+                                                {{ entry }}
+                                            {% else %}
+                                                <ul class="timeline-changes">
+                                                    {% action_message_to_list entry as action_message_list %}
+                                                    {% for action_message in action_message_list %}
+                                                        <li>{{ action_message.msg|style_bold_first_word }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            {% endif %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" role="img" aria-label="!B8;87>20==K9 <09=8=3-F5=B@">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f5eee6"/>
+      <stop offset="100%" stop-color="#e8d2b7"/>
+    </linearGradient>
+    <linearGradient id="rack" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#5a4833"/>
+      <stop offset="100%" stop-color="#3f3124"/>
+    </linearGradient>
+    <linearGradient id="led" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2e9661"/>
+      <stop offset="100%" stop-color="#7fd9a8"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="480" fill="url(#bg)"/>
+  <rect x="0" y="380" width="800" height="100" fill="#d9c4a8" opacity="0.55"/>
+
+  <g filter="none">
+    <rect x="80" y="90" width="150" height="280" rx="10" fill="url(#rack)"/>
+    <rect x="250" y="70" width="150" height="300" rx="10" fill="url(#rack)"/>
+    <rect x="420" y="90" width="150" height="280" rx="10" fill="url(#rack)"/>
+    <rect x="590" y="110" width="130" height="260" rx="10" fill="url(#rack)"/>
+  </g>
+
+  <g>
+    <rect x="95" y="110" width="120" height="18" rx="4" fill="#2a2118"/>
+    <rect x="95" y="138" width="120" height="18" rx="4" fill="#2a2118"/>
+    <rect x="95" y="166" width="120" height="18" rx="4" fill="#2a2118"/>
+    <rect x="95" y="194" width="120" height="18" rx="4" fill="#2a2118"/>
+    <rect x="95" y="222" width="120" height="18" rx="4" fill="#2a2118"/>
+    <rect x="95" y="250" width="120" height="18" rx="4" fill="#2a2118"/>
+    <rect x="95" y="278" width="120" height="18" rx="4" fill="#2a2118"/>
+    <rect x="95" y="306" width="120" height="18" rx="4" fill="#2a2118"/>
+    <rect x="95" y="334" width="120" height="18" rx="4" fill="#2a2118"/>
+    <circle cx="108" cy="119" r="4" fill="url(#led)"/>
+    <circle cx="108" cy="147" r="4" fill="url(#led)"/>
+    <circle cx="108" cy="175" r="4" fill="#e0a96d"/>
+    <circle cx="108" cy="203" r="4" fill="url(#led)"/>
+    <circle cx="108" cy="231" r="4" fill="url(#led)"/>
+    <circle cx="108" cy="259" r="4" fill="url(#led)"/>
+    <circle cx="108" cy="287" r="4" fill="#d36161"/>
+    <circle cx="108" cy="315" r="4" fill="url(#led)"/>
+    <circle cx="108" cy="343" r="4" fill="url(#led)"/>
+  </g>
+
+  <g opacity="0.95">
+    <rect x="265" y="95" width="120" height="18" rx="4" fill="#2a2118"/>
+    <rect x="265" y="123" width="120" height="18" rx="4" fill="#2a2118"/>
+    <rect x="265" y="151" width="120" height="18" rx="4" fill="#2a2118"/>
+    <rect x="265" y="179" width="120" height="18" rx="4" fill="#2a2118"/>
+    <rect x="265" y="207" width="120" height="18" rx="4" fill="#2a2118"/>
+    <rect x="265" y="235" width="120" height="18" rx="4" fill="#2a2118"/>
+    <rect x="265" y="263" width="120" height="18" rx="4" fill="#2a2118"/>
+    <rect x="265" y="291" width="120" height="18" rx="4" fill="#2a2118"/>
+    <rect x="265" y="319" width="120" height="18" rx="4" fill="#2a2118"/>
+    <circle cx="278" cy="104" r="4" fill="url(#led)"/>
+    <circle cx="278" cy="132" r="4" fill="url(#led)"/>
+    <circle cx="278" cy="160" r="4" fill="url(#led)"/>
+    <circle cx="278" cy="188" r="4" fill="url(#led)"/>
+    <circle cx="278" cy="216" r="4" fill="url(#led)"/>
+    <circle cx="278" cy="244" r="4" fill="url(#led)"/>
+    <circle cx="278" cy="272" r="4" fill="url(#led)"/>
+    <circle cx="278" cy="300" r="4" fill="url(#led)"/>
+    <circle cx="278" cy="328" r="4" fill="url(#led)"/>
+  </g>
+
+  <text x="400" y="440" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="18" letter-spacing="0.12em" fill="#6b5438">PROOF-OF-WORK · MINING</text>
+</svg>

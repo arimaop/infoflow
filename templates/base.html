@@ -32,23 +32,14 @@
                 <span class="nav-dot"></span>
                 Аналитика
             </a>
-            <div class="nav-section-title">Управление</div>
-            <a href="{% url 'crypto:coin_list' %}" class="nav-item {% if request.resolver_match.url_name in 'coin_list coin_create coin_update coin_delete' %}nav-item-active{% endif %}">
+            <a href="{% url 'crypto:chronicle' %}" class="nav-item {% if request.resolver_match.url_name == 'chronicle' %}nav-item-active{% endif %}">
                 <span class="nav-dot"></span>
-                Монеты (CRUD)
-            </a>
-            <a href="{% url 'crypto:trade_list' %}" class="nav-item {% if request.resolver_match.url_name in 'trade_list trade_create trade_update trade_delete' %}nav-item-active{% endif %}">
-                <span class="nav-dot"></span>
-                Сделки (CRUD)
-            </a>
-            <a href="{% url 'crypto:position_list' %}" class="nav-item {% if request.resolver_match.url_name in 'position_list position_create position_update position_delete' %}nav-item-active{% endif %}">
-                <span class="nav-dot"></span>
-                Позиции (CRUD)
+                История крипты
             </a>
         </nav>
         <div class="sidebar-footer">
-            <div class="sidebar-caption">Учебный проект Django</div>
-            <div class="sidebar-subcaption">Структура готова к подключению БД</div>
+            <a href="/admin/" class="btn btn-primary sidebar-admin-link">Админ-панель</a>
+            <div class="sidebar-subcaption">Требуется вход администратора</div>
         </div>
     </aside>
 
@@ -60,13 +51,16 @@
                     Информационное веб‑приложение для отображения и управления данными.
                 </p>
             </div>
-            <div class="topbar-actions">
-                <button class="btn btn-ghost">Сменить период</button>
-                <button class="btn btn-primary">Экспорт данных</button>
-            </div>
         </header>
 
         <section class="content-inner">
+            {% if messages %}
+                <div class="flash-list">
+                    {% for message in messages %}
+                        <div class="flash flash-{{ message.tags|default:'info' }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
             {% block content %}{% endblock %}
         </section>
 

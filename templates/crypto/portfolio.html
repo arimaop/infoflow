@@ -9,7 +9,8 @@
         <div>
             <h2 class="section-title">Сводка портфеля</h2>
             <p class="section-subtitle">
-                Позиции подтягиваются из БД через модели. Для управления перейдите к CRUD позиций.
+                Позиции формируются после демо-покупок на «Обзоре рынка». Данные синхронизированы
+                с историей сделок и аналитикой.
             </p>
         </div>
         <div class="section-actions">
@@ -18,49 +19,54 @@
                 <span class="tag tag-soft">День: {{ summary.day_change }}</span>
                 <span class="tag tag-soft">Риск: {{ summary.risk_level }}</span>
             </div>
-            <div class="toolbar-actions">
-                <a class="btn btn-primary" href="{% url 'crypto:position_create' %}">Добавить позицию</a>
-            </div>
         </div>
     </div>
 
-    <div class="cards-grid">
-        {% for p in positions %}
-            <article class="card">
-                <header class="card-header">
-                    <div>
-                        <h3 class="card-title">{{ p.name }}</h3>
-                        <div class="card-symbol">{{ p.asset }}</div>
-                    </div>
-                    <div class="card-price">{{ p.value }}</div>
-                </header>
-                <dl class="card-metrics">
-                    <div class="metric">
-                        <dt>Количество</dt>
-                        <dd class="mono">{{ p.qty }}</dd>
-                    </div>
-                    <div class="metric">
-                        <dt>Средняя цена</dt>
-                        <dd>{{ p.avg_price }}</dd>
-                    </div>
-                    <div class="metric">
-                        <dt>PnL</dt>
-                        <dd class="{% if '-' in p.pnl %}metric-negative{% else %}metric-positive{% endif %}">
-                            {{ p.pnl }} ({{ p.pnl_pct }})
-                        </dd>
-                    </div>
-                    <div class="metric">
-                        <dt>Статус</dt>
-                        <dd>Активно</dd>
-                    </div>
-                </dl>
-                <footer class="card-footer">
-                    <a class="btn btn-ghost btn-small" href="{% url 'crypto:position_update' p.id %}">Редактировать</a>
-                    <a class="btn btn-danger btn-small" href="{% url 'crypto:position_delete' p.id %}">Удалить</a>
-                </footer>
-            </article>
-        {% endfor %}
-    </div>
+    {% if positions %}
+        <div class="cards-grid">
+            {% for p in positions %}
+                <article class="card">
+                    <header class="card-header">
+                        <div>
+                            <h3 class="card-title">{{ p.name }}</h3>
+                            <div class="card-symbol">{{ p.asset }}</div>
+                        </div>
+                        <div class="card-price">{{ p.value }}</div>
+                    </header>
+                    <dl class="card-metrics">
+                        <div class="metric">
+                            <dt>Количество</dt>
+                            <dd class="mono">{{ p.qty }}</dd>
+                        </div>
+                        <div class="metric">
+                            <dt>Средняя цена</dt>
+                            <dd>{{ p.avg_price }}</dd>
+                        </div>
+                        <div class="metric">
+                            <dt>PnL</dt>
+                            <dd class="{% if '-' in p.pnl %}metric-negative{% else %}metric-positive{% endif %}">
+                                {{ p.pnl }} ({{ p.pnl_pct }})
+                            </dd>
+                        </div>
+                        <div class="metric">
+                            <dt>Статус</dt>
+                            <dd>Активно</dd>
+                        </div>
+                    </dl>
+                    <footer class="card-footer">
+                        <button type="button" class="btn btn-ghost btn-small" disabled title="Функция в разработке">
+                            Вывести
+                        </button>
+                        <span class="card-footer-note">В разработке · API вывода</span>
+                    </footer>
+                </article>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="empty-state">
+            Портфель пуст. Купите монеты в разделе
+            <a href="{% url 'crypto:dashboard' %}">Обзор рынка</a>.
+        </p>
+    {% endif %}
 </section>
 {% endblock %}
-

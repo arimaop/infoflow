@@ -51,10 +51,13 @@ DEBUG = True
 # (Иначе при запросах может падать с DisallowedHost.)
 ALLOWED_HOSTS = ["127.0.0.1", "localhost", "0.0.0.0", "testserver"]
 
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
 
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -72,6 +75,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'crypto.middleware.AdminNoCacheMiddleware',
 ]
 
 ROOT_URLCONF = 'info_flow.urls'
@@ -161,8 +165,85 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+LOGIN_URL = "/admin/login/"
+LOGOUT_REDIRECT_URL = "/"
+
+# django-jazzmin — админ-панель в стиле InfoFlow
+JAZZMIN_SETTINGS = {
+    "site_title": "InfoFlow Admin",
+    "site_header": "InfoFlow",
+    "site_brand": "InfoFlow",
+    "site_logo_classes": "img-circle",
+    "welcome_sign": "Панель управления InfoFlow",
+    "copyright": "InfoFlow · Django",
+    "search_model": ["crypto.Coin", "crypto.Trade", "crypto.Position"],
+    "topmenu_links": [
+        {"name": "На сайт", "url": "/", "new_window": False},
+        {"model": "auth.user"},
+    ],
+    "usermenu_links": [
+        {"name": "На сайт", "url": "/", "new_window": False},
+    ],
+    "show_sidebar": True,
+    "navigation_expanded": True,
+    "hide_apps": [],
+    "hide_models": [],
+    "order_with_respect_to": ["crypto", "auth"],
+    "icons": {
+        "auth": "fas fa-users-cog",
+        "auth.user": "fas fa-user",
+        "auth.group": "fas fa-users",
+        "crypto.Coin": "fas fa-coins",
+        "crypto.Trade": "fas fa-exchange-alt",
+        "crypto.Position": "fas fa-wallet",
+    },
+    "default_icon_parents": "fas fa-folder",
+    "default_icon_children": "fas fa-circle",
+    "related_modal_active": False,
+    "custom_css": "css/jazzmin_custom.css",
+    "custom_js": "js/admin_session.js",
+    "changeform_format": "horizontal_tabs",
+    "changeform_format_overrides": {
+        "crypto.coin": "collapsible",
+        "crypto.trade": "collapsible",
+        "crypto.position": "collapsible",
+    },
+    "language_chooser": False,
+}
+
+JAZZMIN_UI_TWEAKS = {
+    "navbar_small_text": False,
+    "footer_small_text": True,
+    "body_small_text": False,
+    "brand_small_text": False,
+    "brand_colour": False,
+    "accent": "accent-warning",
+    "navbar": "navbar-light navbar-warning",
+    "no_navbar_border": False,
+    "navbar_fixed": True,
+    "layout_boxed": False,
+    "footer_fixed": False,
+    "sidebar_fixed": True,
+    "sidebar": "sidebar-light-warning",
+    "sidebar_nav_small_text": False,
+    "sidebar_disable_expand": False,
+    "sidebar_nav_child_indent": True,
+    "sidebar_nav_compact_style": False,
+    "sidebar_nav_legacy_style": False,
+    "sidebar_nav_flat_style": True,
+    "theme": "flatly",
+    "button_classes": {
+        "primary": "btn-primary",
+        "secondary": "btn-secondary",
+        "info": "btn-info",
+        "warning": "btn-warning",
+        "danger": "btn-danger",
+        "success": "btn-success",
+    },
+}

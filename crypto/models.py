@@ -18,6 +18,8 @@ class Coin(models.Model):
 
     class Meta:
         ordering = ["-market_cap_usd", "symbol"]
+        verbose_name = "Монета"
+        verbose_name_plural = "Монеты"
 
     def __str__(self) -> str:
         return f"{self.symbol} — {self.name}"
@@ -32,32 +34,61 @@ class Trade(models.Model):
         FILLED = "FILLED", "Исполнено"
         CANCELLED = "CANCELLED", "Отменено"
 
-    coin = models.ForeignKey(Coin, on_delete=models.PROTECT, related_name="trades")
-    quote_symbol = models.CharField(max_length=16, default="USDT")
+    coin = models.ForeignKey(
+        Coin,
+        on_delete=models.PROTECT,
+        related_name="trades",
+        verbose_name="Монета",
+    )
+    quote_symbol = models.CharField(max_length=16, default="USDT", verbose_name="Котировка")
 
-    side = models.CharField(max_length=8, choices=Side.choices)
-    status = models.CharField(max_length=16, choices=Status.choices, default=Status.FILLED)
+    side = models.CharField(max_length=8, choices=Side.choices, verbose_name="Сторона")
+    status = models.CharField(
+        max_length=16,
+        choices=Status.choices,
+        default=Status.FILLED,
+        verbose_name="Статус",
+    )
 
-    price_usd = models.DecimalField(max_digits=16, decimal_places=2)
-    amount = models.DecimalField(max_digits=18, decimal_places=8)
+    price_usd = models.DecimalField(max_digits=16, decimal_places=2, verbose_name="Цена, $")
+    amount = models.DecimalField(max_digits=18, decimal_places=8, verbose_name="Объём")
 
-    executed_at = models.DateTimeField()
-    created_at = models.DateTimeField(auto_now_add=True)
+    executed_at = models.DateTimeField(verbose_name="Время исполнения")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Создано")
 
     class Meta:
         ordering = ["-executed_at", "-id"]
+        verbose_name = "Сделка"
+        verbose_name_plural = "Сделки"
 
     def __str__(self) -> str:
         return f"{self.side} {self.coin.symbol}/{self.quote_symbol} @ {self.price_usd}"
 
 
 class Position(models.Model):
-    coin = models.ForeignKey(Coin, on_delete=models.PROTECT, related_name="positions")
-    quantity = models.DecimalField(max_digits=18, decimal_places=8, default=0)
-    avg_price_usd = models.DecimalField(max_digits=16, decimal_places=2, default=0)
+    coin = models.ForeignKey(
+        Coin,
+        on_delete=models.PROTECT,
+        related_name="positions",
+        verbose_name="Монета",
+    )
+    quantity = models.DecimalField(
+        max_digits=18,
+        decimal_places=8,
+        default=0,
+        verbose_name="Количество",
+    )
+    avg_price_usd = models.DecimalField(
+        max_digits=16,
+        decimal_places=2,
+        default=0,
+        verbose_name="Средняя цена, $",
+    )
 
     class Meta:
         ordering = ["-quantity", "coin__symbol"]
+        verbose_name = "Позиция"
+        verbose_name_plural = "Позиции"
 
     def __str__(self) -> str:
         return f"{self.coin.symbol}: {self.quantity}"

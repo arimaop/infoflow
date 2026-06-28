@@ -55,7 +55,7 @@ body {
     padding: 22px 20px 18px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     box-shadow: 0 22px 55px rgba(143, 110, 66, 0.35);
     position: sticky;
     top: 24px;
@@ -146,9 +146,23 @@ body {
 }
 
 .sidebar-footer {
+    margin-top: auto;
     padding-top: 18px;
     border-top: 1px solid rgba(255, 255, 255, 0.6);
     font-size: 12px;
+}
+
+.sidebar-admin-link {
+    width: 100%;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.sidebar-subcaption {
+    margin-top: 8px;
+    text-align: center;
+    color: rgba(74, 53, 33, 0.75);
+    font-size: 11px;
 }
 
 .sidebar-caption {
@@ -388,6 +402,102 @@ body {
     color: var(--text-muted);
 }
 
+.card-footer-buy {
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.buy-form {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    width: 100%;
+}
+
+.buy-label {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    min-width: 0;
+}
+
+.buy-label-text {
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+.buy-input {
+    width: 100%;
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 8px 10px;
+    font-size: 13px;
+    background: #fff;
+    color: var(--text-main);
+}
+
+.buy-input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.btn:disabled,
+.btn[disabled] {
+    opacity: 0.55;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.flash-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.flash {
+    border-radius: 14px;
+    padding: 10px 14px;
+    font-size: 13px;
+    border: 1px solid transparent;
+}
+
+.flash-success {
+    background: rgba(46, 150, 97, 0.12);
+    border-color: rgba(46, 150, 97, 0.35);
+    color: #257b4f;
+}
+
+.flash-error {
+    background: rgba(211, 97, 97, 0.12);
+    border-color: rgba(211, 97, 97, 0.35);
+    color: #a94444;
+}
+
+.flash-info,
+.flash-warning {
+    background: var(--accent-soft);
+    border-color: rgba(206, 153, 92, 0.45);
+    color: #8e6a3c;
+}
+
+.empty-state {
+    margin: 8px 0 0;
+    padding: 16px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.65);
+    border: 1px dashed var(--border-subtle);
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.empty-state a {
+    color: var(--accent-strong);
+    font-weight: 600;
+}
+
 .section-columns {
     display: grid;
     grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
@@ -444,7 +554,7 @@ body {
 
 .table-row {
     display: grid;
-    grid-template-columns: 110px 110px 90px 110px 120px 1fr;
+    grid-template-columns: 40px 110px 110px 90px 110px 120px 1fr;
     gap: 10px;
     padding: 12px 14px;
     border-top: 1px solid rgba(224, 205, 181, 0.75);
@@ -647,6 +757,134 @@ body {
     margin-top: 0;
 }
 
+/* --- Chronicle (история крипты) --- */
+
+.chronicle {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.chronicle-lead {
+    margin: 0 0 16px;
+    font-size: 15px;
+    line-height: 1.65;
+    color: #4a3b2c;
+}
+
+.chronicle-heading {
+    margin: 0 0 12px;
+    font-size: 17px;
+    letter-spacing: 0.01em;
+}
+
+.chronicle p {
+    margin: 0 0 12px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #4a3b2c;
+}
+
+.chronicle p:last-child {
+    margin-bottom: 0;
+}
+
+.chronicle-figure {
+    margin: 16px 0 0;
+    border-radius: 18px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid var(--border-subtle);
+    box-shadow: 0 12px 28px rgba(44, 29, 19, 0.06);
+}
+
+.chronicle-figure svg,
+.chronicle-svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 420px;
+}
+
+.chronicle-svg-square {
+    max-height: 280px;
+}
+
+.chronicle-svg-tall {
+    max-height: 320px;
+}
+
+.chronicle-figure-hero .chronicle-svg {
+    max-height: 360px;
+}
+
+.chronicle-figure figcaption {
+    padding: 10px 14px;
+    font-size: 11px;
+    color: var(--text-muted);
+    line-height: 1.45;
+    border-top: 1px solid var(--border-subtle);
+    background: rgba(255, 255, 255, 0.85);
+}
+
+.chronicle-columns {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(220px, 0.8fr);
+    gap: 20px;
+    align-items: start;
+}
+
+.chronicle-col-text {
+    min-width: 0;
+}
+
+.chronicle-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px dashed rgba(140, 125, 108, 0.45);
+}
+
+.chronicle-timeline-item {
+    display: grid;
+    grid-template-columns: 72px minmax(0, 1fr);
+    gap: 12px;
+    align-items: baseline;
+    padding: 10px 12px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.55);
+}
+
+.chronicle-year {
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--accent-strong);
+    letter-spacing: 0.04em;
+}
+
+.chronicle-timeline-item p {
+    margin: 0;
+    font-size: 13px;
+}
+
+.chronicle-callout {
+    margin-top: 16px;
+    padding: 14px 16px;
+    border-radius: 16px;
+    background: rgba(224, 169, 109, 0.14);
+    border: 1px solid rgba(206, 153, 92, 0.35);
+    font-size: 13px;
+    line-height: 1.65;
+    color: #5a4833;
+}
+
+.chronicle-footer-note .muted {
+    margin-top: 12px;
+    font-size: 12px;
+}
+
 @media (max-width: 1024px) {
     .page {
         grid-template-columns: minmax(0, 1fr);
@@ -689,6 +927,10 @@ body {
 
     .kpi-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .chronicle-columns {
+        grid-template-columns: minmax(0, 1fr);
     }
 
     .table-row {

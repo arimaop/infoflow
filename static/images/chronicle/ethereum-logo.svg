@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 836" role="img" aria-label=">3>B8? Ethereum">
+  <defs>
+    <linearGradient id="ethTop" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#8eb8ff"/>
+      <stop offset="100%" stop-color="#627eea"/>
+    </linearGradient>
+    <linearGradient id="ethBottom" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#627eea"/>
+      <stop offset="100%" stop-color="#3c58c4"/>
+    </linearGradient>
+  </defs>
+  <polygon points="256,64 420,280 256,360" fill="url(#ethTop)"/>
+  <polygon points="256,64 92,280 256,360" fill="#8eb8ff" opacity="0.85"/>
+  <polygon points="256,392 420,320 256,772" fill="url(#ethBottom)"/>
+  <polygon points="256,392 92,320 256,772" fill="#627eea" opacity="0.9"/>
+</svg>

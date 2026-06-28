@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label=">3>B8? Bitcoin">
+  <defs>
+    <linearGradient id="coin" x1="20%" y1="10%" x2="80%" y2="90%">
+      <stop offset="0%" stop-color="#ffe7c0"/>
+      <stop offset="50%" stop-color="#e0a96d"/>
+      <stop offset="100%" stop-color="#cf8d3f"/>
+    </linearGradient>
+  </defs>
+  <circle cx="256" cy="256" r="230" fill="url(#coin)"/>
+  <circle cx="256" cy="256" r="200" fill="none" stroke="#fff6e8" stroke-width="6" opacity="0.5"/>
+  <text x="256" y="310" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="210" font-weight="700" fill="#fffaf2">&#8383;</text>
+</svg>

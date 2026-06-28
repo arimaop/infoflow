@@ -1,0 +1,325 @@
+{% extends "base.html" %}
+
+{% block title %}История крипты{% endblock %}
+{% block header_title %}История криптовалют{% endblock %}
+
+{% block content %}
+<article class="chronicle">
+    <section class="section chronicle-hero">
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">От идеи до глобального рынка</h2>
+                <p class="section-subtitle">
+                    Обзор ключевых этапов развития цифровых активов — от экспериментов cypherpunk’ов
+                    до современной индустрии на триллионы долларов.
+                </p>
+            </div>
+            <div class="section-tags">
+                <span class="tag tag-soft">Bitcoin</span>
+                <span class="tag tag-soft">Blockchain</span>
+                <span class="tag tag-soft">Web3</span>
+            </div>
+        </div>
+
+        <p class="chronicle-lead">
+            Криптовалюты — это не просто «интернет-деньги» и не очередной финансовый пузырь, который
+            можно описать одной фразой. За ними стоят десятилетия исследований в криптографии,
+            философия децентрализации, экономические эксперименты и целая культура разработчиков,
+            которые пытались построить деньги без доверенного посредника. История крипты — это
+            история о том, как математика и код постепенно превращались в инфраструктуру, которую
+            сегодня обсуждают центральные банки, крупнейшие фонды и обычные пользователи по всему миру.
+        </p>
+
+        <figure class="chronicle-figure chronicle-figure-hero">
+            <svg class="chronicle-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" role="img" aria-label="Стилизованная монета Bitcoin">
+              <defs>
+                <linearGradient id="hero-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#f8f4ef"/><stop offset="55%" stop-color="#f2e3d3"/><stop offset="100%" stop-color="#e8d2b7"/>
+                </linearGradient>
+                <radialGradient id="hero-coin" cx="50%" cy="35%" r="65%">
+                  <stop offset="0%" stop-color="#ffe7c0"/><stop offset="45%" stop-color="#e0a96d"/><stop offset="100%" stop-color="#cf8d3f"/>
+                </radialGradient>
+                <radialGradient id="hero-glow" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#fff8ee" stop-opacity="0.9"/><stop offset="100%" stop-color="#e0a96d" stop-opacity="0"/>
+                </radialGradient>
+                <filter id="hero-shadow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#8f6e42" flood-opacity="0.28"/>
+                </filter>
+              </defs>
+              <rect width="960" height="420" fill="url(#hero-bg)"/>
+              <circle cx="760" cy="90" r="120" fill="url(#hero-glow)"/>
+              <circle cx="180" cy="320" r="90" fill="url(#hero-glow)"/>
+              <g opacity="0.35" stroke="#c9a06a" stroke-width="2" fill="none">
+                <circle cx="120" cy="110" r="8"/><circle cx="260" cy="70" r="8"/><circle cx="400" cy="130" r="8"/>
+                <circle cx="540" cy="80" r="8"/><circle cx="680" cy="120" r="8"/><circle cx="820" cy="90" r="8"/>
+                <path d="M120 110 L260 70 L400 130 L540 80 L680 120 L820 90"/>
+              </g>
+              <g filter="url(#hero-shadow)">
+                <circle cx="480" cy="210" r="118" fill="url(#hero-coin)"/>
+                <circle cx="480" cy="210" r="102" fill="none" stroke="#fff6e8" stroke-width="4" opacity="0.55"/>
+                <text x="480" y="248" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="96" font-weight="700" fill="#fff8ef">&#8383;</text>
+              </g>
+              <text x="480" y="370" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="22" letter-spacing="0.18em" fill="#6b5438">BITCOIN · 2009</text>
+            </svg>
+            <figcaption>Иллюстрация: символ Bitcoin и распределённая сеть узлов.</figcaption>
+        </figure>
+    </section>
+
+    <section class="section">
+        <h3 class="chronicle-heading">До Bitcoin: корни и предшественники</h3>
+        <p>
+            Чтобы понять, откуда взялся Bitcoin, полезно заглянуть в 1980–1990‑е годы. Именно тогда
+            криптографы начали задаваться вопросом: можно ли создать электронные деньги, которые нельзя
+            просто скопировать, как файл на диске? Ранние концепции цифровых наличных — DigiCash Дэвида
+            Чаума, система b-money Вэя Дая, Hashcash Адама Бэка — закладывали фундамент, но ни одна из
+            них не решила проблему двойной траты без центрального оператора.
+        </p>
+        <p>
+            В 2008 году мир переживал финансовый кризис. Доверие к банкам и регуляторам пошатнулось,
+            а интернет-сообщество cypherpunk’ов уже десятилетие обсуждало идею «deniable cash» и
+            приватных транзакций. На этом фоне 31 октября 2008 года на криптографической рассылке
+            появился документ под названием «Bitcoin: A Peer-to-Peer Electronic Cash System». Его автор
+            скрывался под псевдонимом Сatoshi Nakamoto — личность которого до сих пор остаётся одной
+            из главных загадок индустрии.
+        </p>
+        <p>
+            White paper Bitcoin был коротким, но революционным: он описывал сеть, где участники сами
+            проверяют транзакции, а консенсус достигается через proof-of-work — вычислительную работу,
+            которую сложно подделать, но легко проверить. Это был ответ на вопрос, мучивший
+            криптографов десятилетиями: как добиться согласия в распределённой системе без «главного
+            сервера», которому все должны верить на слово.
+        </p>
+
+        <div class="chronicle-timeline">
+            <div class="chronicle-timeline-item">
+                <span class="chronicle-year">1983</span>
+                <p>Дэвид Чаум описывает идею слепой подписи — основу анонимных платежей.</p>
+            </div>
+            <div class="chronicle-timeline-item">
+                <span class="chronicle-year">1997</span>
+                <p>Adam Back предлагает Hashcash — proof-of-work против спама в e-mail.</p>
+            </div>
+            <div class="chronicle-timeline-item">
+                <span class="chronicle-year">2008</span>
+                <p>Публикация white paper Bitcoin; начало эры публичных блокчейнов.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-secondary">
+        <h3 class="chronicle-heading">2009–2012: рождение сети и первые энтузиасты</h3>
+        <div class="chronicle-columns">
+            <div class="chronicle-col-text">
+                <p>
+                    3 января 2009 года в genesis-блоке Bitcoin была высечена знаменитая строка из
+                    заголовка The Times: «Chancellor on brink of second bailout for banks». Многие
+                    воспринимают это как намёк на мотивацию проекта — альтернатива системе, где
+                    государство и банки спасают друг друга за счёт инфляции и долгов.
+                </p>
+                <p>
+                    Первые годы Bitcoin существовал почти исключительно в узком круге разработчиков и
+                    майнеров. Награда за блок составляла 50 BTC, а стоимость монеты измерялась
+                    копейками или вообще рассматривалась как любопытный эксперимент. Легендарной стала
+                    покупка двух пицц за 10 000 BTC в мае 2010 года — событие, которое сообщество
+                    до сих пор отмечает как «Bitcoin Pizza Day».
+                </p>
+                <p>
+                    Постепенно появились первые биржи, форумы и кошельки. Mt. Gox, изначально
+                    задуманная как площадка для торговли игровыми картами, превратилась в крупнейшую
+                    криптобиржу своего времени. Энтузиасты обсуждали скриптинг, кошельки на бумаге,
+                    офлайн-хранение ключей. Инфраструктура была примитивной, но дух пионерства —
+                    очень сильным: многие участники рынка буквально «жили» на форумах Bitcointalk.
+                </p>
+            </div>
+            <figure class="chronicle-figure">
+                <svg class="chronicle-svg chronicle-svg-square" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Логотип Bitcoin">
+                  <defs>
+                    <radialGradient id="btc-logo-coin" cx="50%" cy="35%" r="65%">
+                      <stop offset="0%" stop-color="#ffe7c0"/><stop offset="50%" stop-color="#e0a96d"/><stop offset="100%" stop-color="#cf8d3f"/>
+                    </radialGradient>
+                  </defs>
+                  <rect width="512" height="512" fill="#f8f4ef"/>
+                  <circle cx="256" cy="256" r="230" fill="url(#btc-logo-coin)"/>
+                  <circle cx="256" cy="256" r="200" fill="none" stroke="#fff6e8" stroke-width="6" opacity="0.5"/>
+                  <text x="256" y="310" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="210" font-weight="700" fill="#fffaf2">&#8383;</text>
+                </svg>
+                <figcaption>Логотип Bitcoin — первой успешной криптовалюты.</figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <section class="section">
+        <h3 class="chronicle-heading">2013–2016: альткоины, Ethereum и ICO</h3>
+        <p>
+            Успех Bitcoin вдохновил волну «альткоинов» — проектов, которые копировали или модифицировали
+            исходный код, добавляя новые параметры: время блока, алгоритм майнинга, эмиссию. Litecoin,
+            Namecoin, Ripple (ныне XRP) и десятки других монет появлялись почти каждую неделю. Часть
+            из них исчезла бесследно, часть нашла свою нишу. Рынок стал разнообразнее, а вместе с
+            ним — и спекулятивнее.
+        </p>
+        <p>
+            В 2013–2014 годах Bitcoin впервые привлёк внимание массовых СМИ: цена пробила $1000,
+            затем рухнула после краха Mt. Gox, где пропали сотни тысяч BTC клиентов. Этот скандал
+            надолго закрепил в сознании публики образ «опасной и непонятной» индустрии, но одновременно
+            показал: даже при потере крупнейшей биржи сеть Bitcoin продолжала работать — блоки
+            по-прежнему включались каждые ~10 минут.
+        </p>
+        <p>
+            Кульминацией второго этапа стал запуск Ethereum в 2015 году. Виталик Бутерин и команда
+            предложили не просто цифровые деньги, а «мировой компьютер» — платформу для смарт-контрактов,
+            программ, которые исполняются в блокчейне без возможности цензуры. Это открыло дорогу
+            токенам, децентрализованным приложениям (dApps) и, позже, лавине ICO — первичных размещений
+            монет, где проекты привлекали миллионы долларов, часто без готового продукта.
+        </p>
+
+        <figure class="chronicle-figure">
+            <svg class="chronicle-svg chronicle-svg-tall" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 836" role="img" aria-label="Логотип Ethereum">
+              <defs>
+                <linearGradient id="eth-top" x1="50%" y1="0%" x2="50%" y2="100%">
+                  <stop offset="0%" stop-color="#8eb8ff"/><stop offset="100%" stop-color="#627eea"/>
+                </linearGradient>
+                <linearGradient id="eth-bottom" x1="50%" y1="0%" x2="50%" y2="100%">
+                  <stop offset="0%" stop-color="#627eea"/><stop offset="100%" stop-color="#3c58c4"/>
+                </linearGradient>
+              </defs>
+              <rect width="512" height="836" fill="#f8f4ef"/>
+              <polygon points="256,64 420,280 256,360" fill="url(#eth-top)"/>
+              <polygon points="256,64 92,280 256,360" fill="#8eb8ff" opacity="0.85"/>
+              <polygon points="256,392 420,320 256,772" fill="url(#eth-bottom)"/>
+              <polygon points="256,392 92,320 256,772" fill="#627eea" opacity="0.9"/>
+            </svg>
+            <figcaption>Логотип Ethereum — платформы смарт-контрактов.</figcaption>
+        </figure>
+    </section>
+
+    <section class="section section-secondary">
+        <h3 class="chronicle-heading">2017–2019: бум, регулирование и «криптозима»</h3>
+        <p>
+            Конец 2017 года многие запомнили как «крипто-манию». Bitcoin поднялся почти до $20 000,
+            Ethereum пережил ажиотаж вокруг ICO, а новые проекты собирали десятки миллионов за считаные
+            минуты. Слово «blockchain» стало модным в корпоративных презентациях: банки создавали
+            консорциумы, стартапы обещали «blockchain для всего» — от логистики до голосований.
+        </p>
+        <p>
+            Однако быстрый рост привлёк и регуляторов. Китай ограничил ICO и локальные биржи, SEC в США
+            начала активнее преследовать нарушителей, европейские органы обсуждали AML/KYC-требования.
+            После пика 2017–2018 годов рынок вошёл в длительную «криптозиму»: цены падали, проекты
+            закрывались, инвесторы теряли интерес. Для индустрии это было болезненно, но полезно:
+            выжили команды с реальной технологией, а не только маркетингом.
+        </p>
+        <p>
+            Именно в этот период созревал фундамент DeFi — децентрализованных финансов. Протоколы
+            вроде MakerDAO, Compound и Uniswap показали, что кредитование, обмен активов и деривативы
+            могут работать on-chain, без традиционных посредников. Пока медийный шум стихал,
+            разработчики строили инфраструктуру, которая позже взорвёт рынок в 2020–2021 годах.
+        </p>
+
+        <figure class="chronicle-figure">
+            <svg class="chronicle-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" role="img" aria-label="Стилизованный майнинг-центр">
+              <defs>
+                <linearGradient id="mine-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#f5eee6"/><stop offset="100%" stop-color="#e8d2b7"/>
+                </linearGradient>
+                <linearGradient id="mine-rack" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#5a4833"/><stop offset="100%" stop-color="#3f3124"/>
+                </linearGradient>
+                <linearGradient id="mine-led" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#2e9661"/><stop offset="100%" stop-color="#7fd9a8"/>
+                </linearGradient>
+              </defs>
+              <rect width="800" height="480" fill="url(#mine-bg)"/>
+              <rect x="0" y="380" width="800" height="100" fill="#d9c4a8" opacity="0.55"/>
+              <rect x="80" y="90" width="150" height="280" rx="10" fill="url(#mine-rack)"/>
+              <rect x="250" y="70" width="150" height="300" rx="10" fill="url(#mine-rack)"/>
+              <rect x="420" y="90" width="150" height="280" rx="10" fill="url(#mine-rack)"/>
+              <rect x="590" y="110" width="130" height="260" rx="10" fill="url(#mine-rack)"/>
+              <g fill="#2a2118">
+                <rect x="95" y="110" width="120" height="18" rx="4"/><rect x="95" y="138" width="120" height="18" rx="4"/>
+                <rect x="95" y="166" width="120" height="18" rx="4"/><rect x="95" y="194" width="120" height="18" rx="4"/>
+                <rect x="95" y="222" width="120" height="18" rx="4"/><rect x="95" y="250" width="120" height="18" rx="4"/>
+                <rect x="265" y="95" width="120" height="18" rx="4"/><rect x="265" y="123" width="120" height="18" rx="4"/>
+                <rect x="265" y="151" width="120" height="18" rx="4"/><rect x="265" y="179" width="120" height="18" rx="4"/>
+                <rect x="265" y="207" width="120" height="18" rx="4"/><rect x="265" y="235" width="120" height="18" rx="4"/>
+              </g>
+              <circle cx="108" cy="119" r="4" fill="url(#mine-led)"/><circle cx="108" cy="147" r="4" fill="url(#mine-led)"/>
+              <circle cx="108" cy="175" r="4" fill="#e0a96d"/><circle cx="108" cy="203" r="4" fill="url(#mine-led)"/>
+              <circle cx="278" cy="104" r="4" fill="url(#mine-led)"/><circle cx="278" cy="132" r="4" fill="url(#mine-led)"/>
+              <circle cx="278" cy="160" r="4" fill="url(#mine-led)"/><circle cx="278" cy="188" r="4" fill="url(#mine-led)"/>
+              <text x="400" y="440" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="18" letter-spacing="0.12em" fill="#6b5438">PROOF-OF-WORK · MINING</text>
+            </svg>
+            <figcaption>Иллюстрация: вычислительные стойки — основа proof-of-work майнинга.</figcaption>
+        </figure>
+    </section>
+
+    <section class="section">
+        <h3 class="chronicle-heading">2020–2022: институционалы, NFT и массовый интерес</h3>
+        <p>
+            Пандемия COVID-19 и беспрецедентная монетарная политика центральных банков изменили
+            отношение к рисковым активам. Bitcoin всё чаще называли «цифровым золотом» — активом
+            с ограниченной эмиссией (максимум 21 млн BTC), который не привязан к решениям конкретного
+            государства. Компании вроде MicroStrategy, Tesla и Square (Block) добавили BTC в баланс,
+            а PayPal и другие платёжные гиганты открыли покупку криптовалют миллионам пользователей.
+        </p>
+        <p>
+            Ethereum пережил переход к proof-of-stake (The Merge, 2022), снизив энергопотребление
+            сети на порядок. Одновременно расцвёл рынок NFT — уникальных токенов, закрепляющих право
+            на цифровой объект. Коллекции вроде CryptoPunks и Bored Ape Yacht Club стали символами
+            нового типа коллекционирования, хотя спекулятивный ажиотаж со временем сменился более
+            спокойным интересом к utility-NFT и цифровой идентичности.
+        </p>
+        <p>
+            DeFi достиг сотен миллиардов долларов заблокированной ликвидности (TVL). Пользователи
+            могли занимать, стейкать, фармить доходность — иногда с доходностью, которую традиционный
+            банк не мог даже представить. Вместе с возможностями пришли и риски: взломы протоколов,
+            «rug pull’ы», impermanent loss. Рынок быстро учился на ошибках, а аудит смарт-контрактов
+            стал отраслевым стандартом.
+        </p>
+    </section>
+
+    <section class="section section-secondary">
+        <h3 class="chronicle-heading">2023–2026: регулирование, ETF и зрелость рынка</h3>
+        <p>
+            После краха FTX в 2022 году индустрия вошла в фазу «compliance-first». Биржи усилили
+            прозрачность резервов, регуляторы ужесточили требования к листингу и хранению активов.
+            В США были одобрены spot ETF на Bitcoin, а затем и на Ethereum — исторический шаг,
+            открывший криптоактивы для традиционных инвесторов через брокерские счета без прямого
+            владения ключами.
+        </p>
+        <p>
+            Центральные банки по всему миру экспериментируют с CBDC — цифровыми валютами государств.
+            Это не криптовалюты в классическом смысле (они централизованы), но показывает, насколько
+            глубоко идеи блокчейна проникли в монетарную политику. Крупные финтех-компании интегрируют
+            stablecoin’ы для трансграничных переводов, а L2-решения (Arbitrum, Optimism, Base) снижают
+            комиссии Ethereum до центов.
+        </p>
+        <p>
+            Сегодня крипторынок — это экосистема с тысячами активов, десятками блокчейнов и
+            инфраструктурой, которую невозможно «выключить» одной кнопкой. Bitcoin по-прежнему
+            доминирует по капитализации и узнаваемости, Ethereum остаётся главной платформой для
+            смарт-контрактов, а новые сети конкурируют за скорость, безопасность и developer experience.
+        </p>
+
+        <div class="chronicle-callout">
+            <strong>Важно помнить:</strong> история криптовалют — это череда инноваций, скандалов,
+            взлётов и падений. Каждый цикл оставляет после себя более зрелую инфраструктуру, но не
+            отменяет рисков: волатильность, мошенничество и технические уязвимости по-прежнему часть
+            реальности. Информированность и осторожность — лучшие спутники в этом мире.
+        </div>
+    </section>
+
+    <section class="section chronicle-footer-note">
+        <h3 class="chronicle-heading">Что дальше?</h3>
+        <p>
+            Эксперты спорят о будущем: станет ли Bitcoin глобальным резервным активом? Заменят ли
+            смарт-контракты часть банковских услуг? Как искусственный интеллект будет взаимодействовать
+            с on-chain-данными? Одно можно сказать уверенно: технология распределённых реестров уже
+            изменила дискурс о деньгах, доверии и цифровой собственности. Даже если отдельные проекты
+            исчезнут, сама идея — деньги и контракты как открытый протокол — останется с нами надолго.
+        </p>
+        <p class="muted">
+            Материал носит обзорный характер и не является инвестиционной рекомендацией.
+            Иллюстрации встроены прямо в страницу и не зависят от загрузки внешних файлов.
+        </p>
+    </section>
+</article>
+{% endblock %}
