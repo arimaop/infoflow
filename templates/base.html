@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Информационная панель{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<div class="page">
+    <aside class="sidebar">
+        <div class="logo">
+            <span class="logo-mark">●</span>
+            <span class="logo-text">Info<span>Flow</span></span>
+        </div>
+        <nav class="nav">
+            <a href="{% url 'crypto:dashboard' %}" class="nav-item {% if request.resolver_match.url_name == 'dashboard' %}nav-item-active{% endif %}">
+                <span class="nav-dot"></span>
+                Обзор рынка
+            </a>
+            <div class="nav-section-title">Разделы</div>
+            <a href="{% url 'crypto:history' %}" class="nav-item {% if request.resolver_match.url_name == 'history' %}nav-item-active{% endif %}">
+                <span class="nav-dot"></span>
+                История сделок
+            </a>
+            <a href="{% url 'crypto:portfolio' %}" class="nav-item {% if request.resolver_match.url_name == 'portfolio' %}nav-item-active{% endif %}">
+                <span class="nav-dot"></span>
+                Портфель
+            </a>
+            <a href="{% url 'crypto:analytics' %}" class="nav-item {% if request.resolver_match.url_name == 'analytics' %}nav-item-active{% endif %}">
+                <span class="nav-dot"></span>
+                Аналитика
+            </a>
+            <div class="nav-section-title">Управление</div>
+            <a href="{% url 'crypto:coin_list' %}" class="nav-item {% if request.resolver_match.url_name in 'coin_list coin_create coin_update coin_delete' %}nav-item-active{% endif %}">
+                <span class="nav-dot"></span>
+                Монеты (CRUD)
+            </a>
+            <a href="{% url 'crypto:trade_list' %}" class="nav-item {% if request.resolver_match.url_name in 'trade_list trade_create trade_update trade_delete' %}nav-item-active{% endif %}">
+                <span class="nav-dot"></span>
+                Сделки (CRUD)
+            </a>
+            <a href="{% url 'crypto:position_list' %}" class="nav-item {% if request.resolver_match.url_name in 'position_list position_create position_update position_delete' %}nav-item-active{% endif %}">
+                <span class="nav-dot"></span>
+                Позиции (CRUD)
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="sidebar-caption">Учебный проект Django</div>
+            <div class="sidebar-subcaption">Структура готова к подключению БД</div>
+        </div>
+    </aside>
+
+    <main class="content">
+        <header class="topbar">
+            <div class="topbar-titles">
+                <h1 class="topbar-title">{% block header_title %}Криптовалютный дашборд{% endblock %}</h1>
+                <p class="topbar-subtitle">
+                    Информационное веб‑приложение для отображения и управления данными.
+                </p>
+            </div>
+            <div class="topbar-actions">
+                <button class="btn btn-ghost">Сменить период</button>
+                <button class="btn btn-primary">Экспорт данных</button>
+            </div>
+        </header>
+
+        <section class="content-inner">
+            {% block content %}{% endblock %}
+        </section>
+
+        <footer class="footer">
+            <span>Разработано на Django · Структура: views → urls → templates → static</span>
+        </footer>
+    </main>
+</div>
+</body>
+</html>
+

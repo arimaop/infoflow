@@ -1,0 +1,27 @@
+{% extends "crypto/manage_base.html" %}
+
+{% block title %}Удалить позицию{% endblock %}
+{% block header_title %}Удалить позицию{% endblock %}
+
+{% block manage_content %}
+<div class="toolbar">
+    <div>
+        <h2 class="toolbar-title">Подтверждение удаления</h2>
+        <p class="help">
+            Позиция: <span class="mono">{{ position.coin.symbol }}</span> · количество: {{ position.quantity }}
+        </p>
+    </div>
+    <div class="toolbar-actions">
+        <a class="btn btn-ghost" href="{% url 'crypto:position_list' %}">Отмена</a>
+    </div>
+</div>
+
+<form method="post" class="card" style="padding: 16px;">
+    {% csrf_token %}
+    <p class="help">Удалить позицию?</p>
+    <div class="form-actions">
+        <button class="btn btn-danger" type="submit">Удалить</button>
+    </div>
+</form>
+{% endblock %}
+

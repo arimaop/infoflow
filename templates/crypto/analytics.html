@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Аналитика{% endblock %}
+{% block header_title %}Аналитика{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="section-header">
+        <div>
+            <h2 class="section-title">KPI и распределение</h2>
+            <p class="section-subtitle">
+                Упрощённая аналитика на демо‑данных. Можно расширить графиками и расчётами из БД.
+            </p>
+        </div>
+        <div class="section-tags">
+            <span class="tag tag-soft">Insights</span>
+            <span class="tag tag-soft">Allocation</span>
+        </div>
+    </div>
+
+    <div class="kpi-grid">
+        {% for k in kpis %}
+            <div class="kpi card">
+                <div class="kpi-label">{{ k.label }}</div>
+                <div class="kpi-value">{{ k.value }}</div>
+                <div class="kpi-hint">{{ k.hint }}</div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="section-columns" style="margin-top: 14px;">
+        <div class="section-col">
+            <h3 class="section-title" style="font-size: 16px; margin-bottom: 8px;">Аллокация портфеля</h3>
+            <div class="allocation">
+                {% for a in allocations %}
+                    <div class="allocation-row">
+                        <div class="mono">{{ a.name }}</div>
+                        <div class="allocation-bar">
+                            <div class="allocation-bar-fill" style="width: {{ a.pct }}%"></div>
+                        </div>
+                        <div class="muted">{{ a.pct }}%</div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="section-col">
+            <h3 class="section-title" style="font-size: 16px; margin-bottom: 8px;">Заметки</h3>
+            <ul class="list">
+                {% for n in notes %}
+                    <li>{{ n }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</section>
+{% endblock %}
+

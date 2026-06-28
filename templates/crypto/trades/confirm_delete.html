@@ -1,0 +1,28 @@
+{% extends "crypto/manage_base.html" %}
+
+{% block title %}Удалить сделку{% endblock %}
+{% block header_title %}Удалить сделку{% endblock %}
+
+{% block manage_content %}
+<div class="toolbar">
+    <div>
+        <h2 class="toolbar-title">Подтверждение удаления</h2>
+        <p class="help">
+            {{ trade.executed_at|date:"d.m H:i" }} · <span class="mono">{{ trade.coin.symbol }}/{{ trade.quote_symbol }}</span> ·
+            {{ trade.side }} @ {{ trade.price_usd }} $
+        </p>
+    </div>
+    <div class="toolbar-actions">
+        <a class="btn btn-ghost" href="{% url 'crypto:trade_list' %}">Отмена</a>
+    </div>
+</div>
+
+<form method="post" class="card" style="padding: 16px;">
+    {% csrf_token %}
+    <p class="help">Удалить сделку без возможности восстановления?</p>
+    <div class="form-actions">
+        <button class="btn btn-danger" type="submit">Удалить</button>
+    </div>
+</form>
+{% endblock %}
+

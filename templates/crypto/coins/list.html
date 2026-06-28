@@ -1,0 +1,49 @@
+{% extends "crypto/manage_base.html" %}
+
+{% block title %}Монеты · CRUD{% endblock %}
+{% block header_title %}Монеты (CRUD){% endblock %}
+
+{% block manage_content %}
+<div class="toolbar">
+    <div>
+        <h2 class="toolbar-title">Справочник монет</h2>
+        <p class="help">Это справочник данных. Позже можно добавить импорт из API и историю котировок.</p>
+    </div>
+    <div class="toolbar-actions">
+        <a class="btn btn-primary" href="{% url 'crypto:coin_create' %}">Добавить монету</a>
+    </div>
+</div>
+
+<div class="table card">
+    <div class="table-row table-head">
+        <div>Символ</div>
+        <div>Название</div>
+        <div>Цена</div>
+        <div>24ч</div>
+        <div>Капитализация</div>
+        <div>Действия</div>
+    </div>
+    {% for c in coins %}
+        <div class="table-row">
+            <div class="mono">{{ c.symbol }}</div>
+            <div>{{ c.name }}</div>
+            <div>{{ c.price_usd }} $</div>
+            <div class="{% if c.change_24h_pct < 0 %}metric-negative{% else %}metric-positive{% endif %}">
+                {{ c.change_24h_pct }}%
+            </div>
+            <div class="muted">{{ c.market_cap_usd }} $</div>
+            <div class="toolbar-actions">
+                <a class="btn btn-ghost btn-small" href="{% url 'crypto:coin_update' c.id %}">Редактировать</a>
+                <a class="btn btn-danger btn-small" href="{% url 'crypto:coin_delete' c.id %}">Удалить</a>
+            </div>
+        </div>
+    {% empty %}
+        <div class="table-row">
+            <div class="muted" style="grid-column: 1 / -1;">
+                Пока нет монет. Добавь первую кнопкой «Добавить монету».
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
+

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}История сделок{% endblock %}
+{% block header_title %}История сделок{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="section-header">
+        <div>
+            <h2 class="section-title">Лента операций</h2>
+            <p class="section-subtitle">
+                Пример данных. Далее можно хранить сделки в базе данных и добавлять фильтры (пара, период, статус).
+            </p>
+        </div>
+        <div class="section-tags">
+            <span class="tag tag-soft">Trades</span>
+            <span class="tag tag-soft">Demo</span>
+        </div>
+    </div>
+
+    <div class="table card">
+        <div class="table-row table-head">
+            <div>Время</div>
+            <div>Пара</div>
+            <div>Сторона</div>
+            <div>Цена</div>
+            <div>Объём</div>
+            <div>Статус</div>
+        </div>
+        {% for t in trades %}
+            <div class="table-row">
+                <div class="muted">{{ t.time }}</div>
+                <div class="mono">{{ t.pair }}</div>
+                <div>
+                    <span class="pill {% if t.side == 'BUY' %}pill-buy{% else %}pill-sell{% endif %}">
+                        {{ t.side }}
+                    </span>
+                </div>
+                <div>{{ t.price }}</div>
+                <div>{{ t.amount }}</div>
+                <div>
+                    <span class="pill {% if t.status == 'Отменено' %}pill-cancel{% else %}pill-ok{% endif %}">
+                        {{ t.status }}
+                    </span>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
+

@@ -1,0 +1,49 @@
+{% extends "crypto/manage_base.html" %}
+
+{% block title %}Сделки · CRUD{% endblock %}
+{% block header_title %}Сделки (CRUD){% endblock %}
+
+{% block manage_content %}
+<div class="toolbar">
+    <div>
+        <h2 class="toolbar-title">История сделок (управление)</h2>
+        <p class="help">Добавляй/редактируй сделки — они автоматически попадут в раздел «История сделок».</p>
+    </div>
+    <div class="toolbar-actions">
+        <a class="btn btn-primary" href="{% url 'crypto:trade_create' %}">Добавить сделку</a>
+    </div>
+</div>
+
+<div class="table card">
+    <div class="table-row table-head">
+        <div>Время</div>
+        <div>Пара</div>
+        <div>Сторона</div>
+        <div>Цена</div>
+        <div>Объём</div>
+        <div>Действия</div>
+    </div>
+    {% for t in trades %}
+        <div class="table-row">
+            <div class="muted">{{ t.executed_at|date:"d.m H:i" }}</div>
+            <div class="mono">{{ t.coin.symbol }}/{{ t.quote_symbol }}</div>
+            <div>
+                <span class="pill {% if t.side == 'BUY' %}pill-buy{% else %}pill-sell{% endif %}">{{ t.side }}</span>
+            </div>
+            <div>{{ t.price_usd }} $</div>
+            <div class="mono">{{ t.amount }} {{ t.coin.symbol }}</div>
+            <div class="toolbar-actions">
+                <a class="btn btn-ghost btn-small" href="{% url 'crypto:trade_update' t.id %}">Редактировать</a>
+                <a class="btn btn-danger btn-small" href="{% url 'crypto:trade_delete' t.id %}">Удалить</a>
+            </div>
+        </div>
+    {% empty %}
+        <div class="table-row">
+            <div class="muted" style="grid-column: 1 / -1;">
+                Пока нет сделок. Добавь первую кнопкой «Добавить сделку».
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
+

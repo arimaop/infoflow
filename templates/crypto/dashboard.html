@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Криптовалютный дашборд{% endblock %}
+
+{% block header_title %}
+Криптовалютный дашборд
+{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="section-header">
+        <div>
+            <h2 class="section-title">Обзор рынка криптовалют</h2>
+            <p class="section-subtitle">
+                Ниже приведён пример данных по популярным криптовалютам. В реальном проекте сюда
+                можно подключить базу данных или внешний API.
+            </p>
+        </div>
+        <div class="section-tags">
+            <span class="tag tag-soft">Криптовалюты</span>
+            <span class="tag tag-soft">Учебный пример</span>
+            <span class="tag tag-soft">Django · Templates</span>
+        </div>
+    </div>
+
+    <div class="cards-grid">
+        {% for coin in crypto_data %}
+            <article class="card card-coin">
+                <header class="card-header">
+                    <div>
+                        <h3 class="card-title">{{ coin.name }}</h3>
+                        <div class="card-symbol">{{ coin.symbol }}</div>
+                    </div>
+                    <div class="card-price">{{ coin.price }}</div>
+                </header>
+                <p class="card-tagline">{{ coin.tagline }}</p>
+                <dl class="card-metrics">
+                    <div class="metric">
+                        <dt>Изменение 24ч</dt>
+                        <dd class="{% if '-' in coin.change_24h %}metric-negative{% else %}metric-positive{% endif %}">
+                            {{ coin.change_24h }}
+                        </dd>
+                    </div>
+                    <div class="metric">
+                        <dt>Капитализация</dt>
+                        <dd>{{ coin.market_cap }}</dd>
+                    </div>
+                    <div class="metric">
+                        <dt>Объём 24ч</dt>
+                        <dd>{{ coin.volume_24h }}</dd>
+                    </div>
+                    <div class="metric">
+                        <dt>Доминантность</dt>
+                        <dd>{{ coin.dominance }}</dd>
+                    </div>
+                </dl>
+                <footer class="card-footer">
+                    <button class="btn btn-ghost btn-small" disabled>Подробнее</button>
+                    <span class="card-footer-note">Кнопка заглушка · для примера UI</span>
+                </footer>
+            </article>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="section section-secondary">
+    <div class="section-columns">
+        <div class="section-col">
+            <h2 class="section-title">Идея информационного веб‑приложения</h2>
+            <p class="section-text">
+                Данное веб‑приложение демонстрирует архитектуру для работы с любыми табличными
+                или аналитическими данными. На уровне Django вы сможете:
+            </p>
+            <ul class="list">
+                <li>подключить базу данных (SQLite, PostgreSQL и т.д.);</li>
+                <li>создать модели для сущностей (например, `Coin`, `Quote`, `PortfolioRecord`);</li>
+                <li>организовать CRUD‑интерфейсы для управления данными;</li>
+                <li>добавить фильтры, поиск, сортировку и пагинацию;</li>
+                <li>строить аналитические панели и отчёты.</li>
+            </ul>
+        </div>
+        <div class="section-col">
+            <h3 class="section-subtitle">Как это расширить для курсовой</h3>
+            <ol class="list list-ordered">
+                <li>Спроектировать структуру базы данных под выбранную предметную область.</li>
+                <li>Реализовать модели Django и миграции.</li>
+                <li>Создать формы и представления для добавления/редактирования записей.</li>
+                <li>Добавить авторизацию и разграничение прав (например, доступ только авторизованным).</li>
+                <li>Реализовать отчёты, фильтрацию и экспорт данных (CSV/Excel).</li>
+            </ol>
+        </div>
+    </div>
+</section>
+{% endblock %}
+

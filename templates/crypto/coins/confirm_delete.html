@@ -1,0 +1,28 @@
+{% extends "crypto/manage_base.html" %}
+
+{% block title %}Удалить монету{% endblock %}
+{% block header_title %}Удалить монету{% endblock %}
+
+{% block manage_content %}
+<div class="toolbar">
+    <div>
+        <h2 class="toolbar-title">Подтверждение удаления</h2>
+        <p class="help">Монета: <span class="mono">{{ coin.symbol }}</span> — {{ coin.name }}</p>
+    </div>
+    <div class="toolbar-actions">
+        <a class="btn btn-ghost" href="{% url 'crypto:coin_list' %}">Отмена</a>
+    </div>
+</div>
+
+<form method="post" class="card" style="padding: 16px;">
+    {% csrf_token %}
+    <p class="help">Удалить монету? Если есть сделки/позиции, связанные с ней, Django может запретить удаление.</p>
+    {% if error %}
+        <p class="help metric-negative">{{ error }}</p>
+    {% endif %}
+    <div class="form-actions">
+        <button class="btn btn-danger" type="submit">Удалить</button>
+    </div>
+</form>
+{% endblock %}
+
