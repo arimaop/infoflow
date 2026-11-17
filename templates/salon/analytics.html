@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}Аналитика — BlueLine{% endblock %}
+{% block header_title %}Аналитика{% endblock %}
+{% block header_subtitle %}KPI салона по заказам, выручке и категориям Apple.{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="section-header">
+        <div>
+            <h2 class="section-title">Показатели салона</h2>
+            <p class="section-subtitle">
+                Цифры считаются из заказов и позиций. Отменённые продажи в выручку не входят.
+            </p>
+        </div>
+        <div class="section-tags">
+            <span class="tag tag-soft">Sales</span>
+            <span class="tag tag-soft">Margin mix</span>
+        </div>
+    </div>
+
+    <div class="kpi-grid">
+        {% for k in kpis %}
+            <div class="kpi card">
+                <div class="kpi-label">{{ k.label }}</div>
+                <div class="kpi-value">{{ k.value }}</div>
+                <div class="kpi-hint">{{ k.hint }}</div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="section-columns" style="margin-top: 14px;">
+        <div class="section-col">
+            <h3 class="section-title" style="font-size: 16px; margin-bottom: 8px;">Выручка по категориям</h3>
+            <div class="allocation">
+                {% for a in allocations %}
+                    <div class="allocation-row allocation-row-wide">
+                        <div>{{ a.name }}</div>
+                        <div class="allocation-bar">
+                            <div class="allocation-bar-fill" style="width: {{ a.pct }}%"></div>
+                        </div>
+                        <div class="muted">{{ a.pct }}%</div>
+                    </div>
+                {% empty %}
+                    <p class="muted">Пока нет продаж для распределения.</p>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="section-col">
+            <h3 class="section-title" style="font-size: 16px; margin-bottom: 8px;">Статусы заказов</h3>
+            <ul class="list">
+                {% for row in status_counts %}
+                    <li>{{ row.label }} — {{ row.total }}</li>
+                {% empty %}
+                    <li>Заказов ещё нет.</li>
+                {% endfor %}
+            </ul>
+            <h3 class="section-title" style="font-size: 16px; margin: 16px 0 8px;">Заметки</h3>
+            <ul class="list">
+                {% for n in notes %}
+                    <li>{{ n }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</section>
+{% endblock %}

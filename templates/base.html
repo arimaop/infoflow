@@ -3,7 +3,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Информационная панель{% endblock %}</title>
+    <title>{% block title %}BlueLine — салон связи{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
@@ -11,44 +11,53 @@
 <div class="page">
     <aside class="sidebar">
         <div class="logo">
-            <span class="logo-mark">●</span>
-            <span class="logo-text">Info<span>Flow</span></span>
+            <span class="logo-mark">
+                <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                    <rect x="6" y="3" width="12" height="18" rx="3" fill="currentColor"/>
+                    <rect x="9" y="6" width="6" height="9" rx="1" fill="#0b3a82"/>
+                </svg>
+            </span>
+            <span class="logo-text">Blue<span>Line</span></span>
         </div>
         <nav class="nav">
-            <a href="{% url 'crypto:dashboard' %}" class="nav-item {% if request.resolver_match.url_name == 'dashboard' %}nav-item-active{% endif %}">
+            <a href="{% url 'salon:catalog' %}" class="nav-item {% if request.resolver_match.url_name == 'catalog' %}nav-item-active{% endif %}">
                 <span class="nav-dot"></span>
-                Обзор рынка
+                Витрина
             </a>
-            <div class="nav-section-title">Разделы</div>
-            <a href="{% url 'crypto:history' %}" class="nav-item {% if request.resolver_match.url_name == 'history' %}nav-item-active{% endif %}">
+            <div class="nav-section-title">Салон</div>
+            <a href="{% url 'salon:services' %}" class="nav-item {% if request.resolver_match.url_name == 'services' %}nav-item-active{% endif %}">
                 <span class="nav-dot"></span>
-                История сделок
+                Услуги
             </a>
-            <a href="{% url 'crypto:portfolio' %}" class="nav-item {% if request.resolver_match.url_name == 'portfolio' %}nav-item-active{% endif %}">
+            <a href="{% url 'salon:orders' %}" class="nav-item {% if request.resolver_match.url_name == 'orders' %}nav-item-active{% endif %}">
                 <span class="nav-dot"></span>
-                Портфель
+                Заказы
             </a>
-            <a href="{% url 'crypto:analytics' %}" class="nav-item {% if request.resolver_match.url_name == 'analytics' %}nav-item-active{% endif %}">
+            <a href="{% url 'salon:warehouse' %}" class="nav-item {% if request.resolver_match.url_name == 'warehouse' %}nav-item-active{% endif %}">
+                <span class="nav-dot"></span>
+                Склад
+            </a>
+            <a href="{% url 'salon:analytics' %}" class="nav-item {% if request.resolver_match.url_name == 'analytics' %}nav-item-active{% endif %}">
                 <span class="nav-dot"></span>
                 Аналитика
             </a>
-            <a href="{% url 'crypto:chronicle' %}" class="nav-item {% if request.resolver_match.url_name == 'chronicle' %}nav-item-active{% endif %}">
+            <a href="{% url 'salon:about' %}" class="nav-item {% if request.resolver_match.url_name == 'about' %}nav-item-active{% endif %}">
                 <span class="nav-dot"></span>
-                История крипты
+                О компании
             </a>
         </nav>
         <div class="sidebar-footer">
             <a href="/admin/" class="btn btn-primary sidebar-admin-link">Админ-панель</a>
-            <div class="sidebar-subcaption">Требуется вход администратора</div>
+            <div class="sidebar-subcaption">Jazzmin · вход администратора</div>
         </div>
     </aside>
 
     <main class="content">
         <header class="topbar">
             <div class="topbar-titles">
-                <h1 class="topbar-title">{% block header_title %}Криптовалютный дашборд{% endblock %}</h1>
+                <h1 class="topbar-title">{% block header_title %}Салон связи BlueLine{% endblock %}</h1>
                 <p class="topbar-subtitle">
-                    Информационное веб‑приложение для отображения и управления данными.
+                    {% block header_subtitle %}ИП по ресейлу техники Apple: витрина, склад, услуги и учёт продаж.{% endblock %}
                 </p>
             </div>
         </header>
@@ -65,10 +74,9 @@
         </section>
 
         <footer class="footer">
-            <span>Разработано на Django · Структура: views → urls → templates → static</span>
+            <span>ИП BlueLine · Django + SQLite · курсовая: информационная система салона связи</span>
         </footer>
     </main>
 </div>
 </body>
 </html>
-

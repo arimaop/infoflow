@@ -17,12 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from crypto.admin_auth import admin_logout_view
+from salon.admin_auth import admin_logout_view
 
 urlpatterns = [
     path("admin/logout/", admin_logout_view, name="admin_logout"),
     path('admin/', admin.site.urls),
-    path('', include('crypto.urls')),
+    path('', include('salon.urls')),
 ]
 
 from django.conf import settings

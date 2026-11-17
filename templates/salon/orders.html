@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Заказы — BlueLine{% endblock %}
+{% block header_title %}Заказы{% endblock %}
+{% block header_subtitle %}Продажи с сайта и из салона, синхронизированные со складом.{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="section-header">
+        <div>
+            <h2 class="section-title">Журнал продаж</h2>
+            <p class="section-subtitle">
+                Заказы из SQLite, включая покупки с витрины. Статусы меняются в админ-панели.
+            </p>
+        </div>
+        <div class="section-tags">
+            <span class="tag tag-soft">Orders</span>
+            <span class="tag tag-soft">SQLite</span>
+        </div>
+    </div>
+
+    <div class="table card table-orders">
+        <div class="table-row table-head">
+            <div>№</div>
+            <div>Номер</div>
+            <div>Время</div>
+            <div>Клиент</div>
+            <div>Состав</div>
+            <div>Сумма</div>
+            <div>Статус</div>
+        </div>
+        {% for order in orders %}
+            <div class="table-row">
+                <div class="mono">{{ order.num }}</div>
+                <div class="mono">{{ order.number }}</div>
+                <div class="muted">{{ order.time }}</div>
+                <div>{{ order.customer }}</div>
+                <div>{{ order.items }}</div>
+                <div>{{ order.total }}</div>
+                <div>
+                    <span class="pill {% if order.status_code == 'CANCELLED' %}pill-cancel{% elif order.status_code == 'ISSUED' %}pill-ok{% else %}pill-buy{% endif %}">
+                        {{ order.status }}
+                    </span>
+                </div>
+            </div>
+        {% empty %}
+            <p class="empty-state">Заказов пока нет. Оформите покупку на витрине.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

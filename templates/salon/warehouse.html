@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Склад — BlueLine{% endblock %}
+{% block header_title %}Склад{% endblock %}
+{% block header_subtitle %}Остатки, закупка и розница по каждой позиции.{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="section-header">
+        <div>
+            <h2 class="section-title">Остатки техники</h2>
+            <p class="section-subtitle">
+                После продажи с витрины количество уменьшается автоматически.
+            </p>
+        </div>
+        <div class="section-tags">
+            <span class="tag tag-soft">Позиций: {{ summary.positions }}</span>
+            <span class="tag tag-soft">Единиц: {{ summary.units }}</span>
+            <span class="tag tag-soft">Закупка: {{ summary.stock_sum }}</span>
+            <span class="tag tag-soft">Витрина: {{ summary.retail_sum }}</span>
+        </div>
+    </div>
+
+    {% if products %}
+        <div class="cards-grid">
+            {% for product in products %}
+                <article class="card">
+                    <header class="card-header">
+                        <div>
+                            <h3 class="card-title">{{ product.name }}</h3>
+                            <div class="card-symbol">{{ product.sku }} · {{ product.category }}</div>
+                        </div>
+                        <div class="card-price">{{ product.stock }} шт.</div>
+                    </header>
+                    <dl class="card-metrics">
+                        <div class="metric">
+                            <dt>Закупка</dt>
+                            <dd>{{ product.purchase }}</dd>
+                        </div>
+                        <div class="metric">
+                            <dt>Розница</dt>
+                            <dd>{{ product.price }}</dd>
+                        </div>
+                        <div class="metric">
+                            <dt>Маржа / шт.</dt>
+                            <dd class="metric-positive">{{ product.margin }}</dd>
+                        </div>
+                        <div class="metric">
+                            <dt>Стоимость остатка</dt>
+                            <dd class="{% if product.low %}metric-negative{% endif %}">{{ product.stock_value }}</dd>
+                        </div>
+                    </dl>
+                    {% if product.low %}
+                        <footer class="card-footer">
+                            <span class="pill pill-sell">Мало на складе</span>
+                        </footer>
+                    {% endif %}
+                </article>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="empty-state">Склад пуст. Добавьте товары в админ-панели.</p>
+    {% endif %}
+</section>
+{% endblock %}

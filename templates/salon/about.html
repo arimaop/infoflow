@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}О компании — BlueLine{% endblock %}
+{% block header_title %}О компании{% endblock %}
+{% block header_subtitle %}ИП, которое открыло салон связи и занялось ресейлом Apple.{% endblock %}
+
+{% block content %}
+<section class="section chronicle">
+    <p class="chronicle-lead">
+        BlueLine — информационная система салона связи индивидуального предпринимателя.
+        Компания стартовала как небольшая точка по подключению тарифов и продаже аксессуаров,
+        а затем сфокусировалась на перепродаже техники Apple: новые устройства, восстановленные
+        аппараты после диагностики и комиссионный приём по trade-in.
+    </p>
+
+    <div class="chronicle-columns">
+        <div class="chronicle-col-text">
+            <h3 class="chronicle-heading">Зачем салону своя ИС</h3>
+            <p>
+                Ресейл живёт на остатках, марже и доверии. Нужно одновременно видеть витрину,
+                понимать, что лежит на складе, фиксировать заявки на услуги и не терять заказы
+                с сайта. Поэтому вместо таблиц в мессенджере у BlueLine — Django-приложение
+                с SQLite и админ-панелью Jazzmin.
+            </p>
+            <p>
+                Клиент выбирает iPhone или Mac на витрине, менеджер ведёт выдачу и сервис,
+                владелец ИП смотрит аналитику: средний чек, выручку по линейкам и «зависшие»
+                статусы заказов.
+            </p>
+            <div class="chronicle-callout">
+                Формат работы: розница в салоне + онлайн-витрина. Гарантия салона —
+                12 месяцев на новые устройства и 6 месяцев на восстановленные.
+                Техника проверяется перед выкладкой: аккумулятор, Face ID, модемы связи.
+            </div>
+        </div>
+        <aside>
+            <h3 class="chronicle-heading">Как устроен салон</h3>
+            <div class="chronicle-timeline">
+                <div class="chronicle-timeline-item">
+                    <div class="chronicle-year">01</div>
+                    <p>Регистрация ИП и точка связи: SIM, eSIM, аксессуары.</p>
+                </div>
+                <div class="chronicle-timeline-item">
+                    <div class="chronicle-year">02</div>
+                    <p>Запуск ресейла Apple: закупка партий и trade-in.</p>
+                </div>
+                <div class="chronicle-timeline-item">
+                    <div class="chronicle-year">03</div>
+                    <p>Складской учёт, витрина и журнал заказов в одной системе.</p>
+                </div>
+                <div class="chronicle-timeline-item">
+                    <div class="chronicle-year">04</div>
+                    <p>Услуги: настройка, диагностика, подбор тарифа.</p>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <p class="muted chronicle-footer-note">
+        Учебный проект курсовой работы. Не является официальным магазином Apple.
+    </p>
+</section>
+{% endblock %}

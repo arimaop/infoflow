@@ -37,7 +37,6 @@ def clear_admin_log_view(request):
 
 
 def register_admin_auth_urls():
-    """Регистрирует кастомные URL внутри admin.site (namespace admin:)."""
     original_get_urls = admin.site.get_urls
 
     def get_urls():

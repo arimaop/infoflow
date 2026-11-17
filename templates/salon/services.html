@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Услуги — BlueLine{% endblock %}
+{% block header_title %}Услуги салона{% endblock %}
+{% block header_subtitle %}Не только продажа: настройка, trade-in, связь и сервис.{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="section-header">
+        <div>
+            <h2 class="section-title">Сервис и связь</h2>
+            <p class="section-subtitle">
+                Оставьте заявку — она попадёт в админ-панель к менеджеру.
+            </p>
+        </div>
+        <div class="section-tags">
+            <span class="tag tag-soft">Trade-in</span>
+            <span class="tag tag-soft">eSIM</span>
+            <span class="tag tag-soft">Настройка</span>
+        </div>
+    </div>
+
+    <div class="cards-grid">
+        {% for service in services %}
+            <article class="card">
+                <header class="card-header">
+                    <div>
+                        <h3 class="card-title">{{ service.name }}</h3>
+                        <div class="card-symbol">{{ service.duration_min }} мин</div>
+                    </div>
+                    <div class="card-price">
+                        {% if service.price == 0 %}бесплатно{% else %}{{ service.price }} ₽{% endif %}
+                    </div>
+                </header>
+                <p class="card-tagline">{{ service.description }}</p>
+                <form method="post" action="{% url 'salon:request_service' service.id %}" class="service-form">
+                    {% csrf_token %}
+                    <label class="buy-label">
+                        <span class="buy-label-text">Имя</span>
+                        <input type="text" name="full_name" class="buy-input" required>
+                    </label>
+                    <label class="buy-label">
+                        <span class="buy-label-text">Телефон</span>
+                        <input type="tel" name="phone" class="buy-input" placeholder="+7…" required>
+                    </label>
+                    <label class="buy-label">
+                        <span class="buy-label-text">Комментарий</span>
+                        <input type="text" name="comment" class="buy-input" placeholder="Модель устройства">
+                    </label>
+                    <button type="submit" class="btn btn-primary btn-small">Оставить заявку</button>
+                </form>
+            </article>
+        {% empty %}
+            <p class="empty-state">Услуги не заведены. Добавьте их в админ-панели.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

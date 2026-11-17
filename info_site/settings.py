@@ -49,7 +49,20 @@ DEBUG = True
 
 # Для локальной разработки разрешаем типичные host'ы.
 # (Иначе при запросах может падать с DisallowedHost.)
-ALLOWED_HOSTS = ["127.0.0.1", "localhost", "0.0.0.0", "testserver"]
+# Локально + поддомены PythonAnywhere. Свой хост можно задать в .env:
+# ALLOWED_HOSTS=yourname.pythonanywhere.com,127.0.0.1
+# CSRF_TRUSTED_ORIGINS=https://yourname.pythonanywhere.com
+_default_hosts = "127.0.0.1,localhost,0.0.0.0,testserver,.pythonanywhere.com"
+ALLOWED_HOSTS = [
+    host.strip()
+    for host in os.environ.get("ALLOWED_HOSTS", _default_hosts).split(",")
+    if host.strip()
+]
+CSRF_TRUSTED_ORIGINS = [
+    origin.strip()
+    for origin in os.environ.get("CSRF_TRUSTED_ORIGINS", "").split(",")
+    if origin.strip()
+]
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
@@ -64,7 +77,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'crypto',
+    'salon.apps.SalonConfig',
 ]
 
 MIDDLEWARE = [
@@ -75,7 +88,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'crypto.middleware.AdminNoCacheMiddleware',
+    'salon.middleware.AdminNoCacheMiddleware',
 ]
 
 ROOT_URLCONF = 'info_flow.urls'
@@ -174,15 +187,15 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 LOGIN_URL = "/admin/login/"
 LOGOUT_REDIRECT_URL = "/"
 
-# django-jazzmin — админ-панель в стиле InfoFlow
+# django-jazzmin — админ-панель салона BlueLine
 JAZZMIN_SETTINGS = {
-    "site_title": "InfoFlow Admin",
-    "site_header": "InfoFlow",
-    "site_brand": "InfoFlow",
+    "site_title": "BlueLine Admin",
+    "site_header": "BlueLine",
+    "site_brand": "BlueLine",
     "site_logo_classes": "img-circle",
-    "welcome_sign": "Панель управления InfoFlow",
-    "copyright": "InfoFlow · Django",
-    "search_model": ["crypto.Coin", "crypto.Trade", "crypto.Position"],
+    "welcome_sign": "Панель салона связи BlueLine",
+    "copyright": "ИП BlueLine · Django",
+    "search_model": ["salon.Product", "salon.Customer", "salon.Order"],
     "topmenu_links": [
         {"name": "На сайт", "url": "/", "new_window": False},
         {"model": "auth.user"},
@@ -194,14 +207,19 @@ JAZZMIN_SETTINGS = {
     "navigation_expanded": True,
     "hide_apps": [],
     "hide_models": [],
-    "order_with_respect_to": ["crypto", "auth"],
+    "order_with_respect_to": ["salon", "auth"],
     "icons": {
         "auth": "fas fa-users-cog",
         "auth.user": "fas fa-user",
         "auth.group": "fas fa-users",
-        "crypto.Coin": "fas fa-coins",
-        "crypto.Trade": "fas fa-exchange-alt",
-        "crypto.Position": "fas fa-wallet",
+        "salon.Category": "fas fa-layer-group",
+        "salon.Product": "fas fa-mobile-alt",
+        "salon.Customer": "fas fa-user-tag",
+        "salon.Employee": "fas fa-id-badge",
+        "salon.Order": "fas fa-receipt",
+        "salon.OrderItem": "fas fa-list",
+        "salon.Service": "fas fa-tools",
+        "salon.ServiceRequest": "fas fa-calendar-check",
     },
     "default_icon_parents": "fas fa-folder",
     "default_icon_children": "fas fa-circle",
@@ -210,9 +228,9 @@ JAZZMIN_SETTINGS = {
     "custom_js": "js/admin_session.js",
     "changeform_format": "horizontal_tabs",
     "changeform_format_overrides": {
-        "crypto.coin": "collapsible",
-        "crypto.trade": "collapsible",
-        "crypto.position": "collapsible",
+        "salon.product": "collapsible",
+        "salon.order": "horizontal_tabs",
+        "salon.customer": "collapsible",
     },
     "language_chooser": False,
 }
@@ -222,22 +240,22 @@ JAZZMIN_UI_TWEAKS = {
     "footer_small_text": True,
     "body_small_text": False,
     "brand_small_text": False,
-    "brand_colour": False,
-    "accent": "accent-warning",
-    "navbar": "navbar-light navbar-warning",
+    "brand_colour": "navbar-primary",
+    "accent": "accent-primary",
+    "navbar": "navbar-dark navbar-primary",
     "no_navbar_border": False,
     "navbar_fixed": True,
     "layout_boxed": False,
     "footer_fixed": False,
     "sidebar_fixed": True,
-    "sidebar": "sidebar-light-warning",
+    "sidebar": "sidebar-dark-primary",
     "sidebar_nav_small_text": False,
     "sidebar_disable_expand": False,
     "sidebar_nav_child_indent": True,
     "sidebar_nav_compact_style": False,
     "sidebar_nav_legacy_style": False,
     "sidebar_nav_flat_style": True,
-    "theme": "flatly",
+    "theme": "cosmo",
     "button_classes": {
         "primary": "btn-primary",
         "secondary": "btn-secondary",

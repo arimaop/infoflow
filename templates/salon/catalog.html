@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block title %}Витрина — BlueLine{% endblock %}
+{% block header_title %}Витрина Apple{% endblock %}
+{% block header_subtitle %}Новые и восстановленные устройства с проверкой и гарантией салона.{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div>
+        <p class="hero-kicker">ИП BlueLine · салон связи</p>
+        <h2 class="hero-title">Ресейл техники Apple без серых сюрпризов</h2>
+        <p class="hero-text">
+            Каталог из базы данных SQLite. Укажите количество и оформите заказ —
+            позиция уйдёт со склада, появится в заказах и обновит аналитику.
+        </p>
+    </div>
+    <div class="hero-stats">
+        <div>
+            <strong>{{ stats.sku }}</strong>
+            <span>моделей</span>
+        </div>
+        <div>
+            <strong>{{ stats.stock }}</strong>
+            <span>на складе</span>
+        </div>
+        <div>
+            <strong>{{ stats.orders }}</strong>
+            <span>заказов</span>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-header">
+        <div>
+            <h2 class="section-title">Каталог</h2>
+            <p class="section-subtitle">Фильтр по линейке и поиск по названию.</p>
+        </div>
+        <form class="filter-bar" method="get">
+            <input class="buy-input" type="search" name="q" value="{{ query }}" placeholder="Найти iPhone, Mac…">
+            <select class="buy-input" name="category" onchange="this.form.submit()">
+                <option value="">Все категории</option>
+                {% for category in categories %}
+                    <option value="{{ category.slug }}" {% if active_category == category.slug %}selected{% endif %}>
+                        {{ category.name }}
+                    </option>
+                {% endfor %}
+            </select>
+            <button type="submit" class="btn btn-ghost btn-small">Показать</button>
+        </form>
+    </div>
+
+    {% if products %}
+        <div class="cards-grid">
+            {% for product in products %}
+                <article class="card card-coin">
+                    <header class="card-header">
+                        <div>
+                            <h3 class="card-title">{{ product.name }}</h3>
+                            <div class="card-symbol">{{ product.sku }} · {{ product.category }}</div>
+                        </div>
+                        <div class="card-price">{{ product.price }}</div>
+                    </header>
+                    <p class="card-tagline">{{ product.tagline }}</p>
+                    <dl class="card-metrics">
+                        <div class="metric">
+                            <dt>Состояние</dt>
+                            <dd>{{ product.condition }}</dd>
+                        </div>
+                        <div class="metric">
+                            <dt>Конфигурация</dt>
+                            <dd>{{ product.storage|default:"—" }}{% if product.color %} · {{ product.color }}{% endif %}</dd>
+                        </div>
+                        <div class="metric">
+                            <dt>Остаток</dt>
+                            <dd class="{% if product.in_stock %}metric-positive{% else %}metric-negative{% endif %}">
+                                {{ product.stock }} шт.
+                            </dd>
+                        </div>
+                        <div class="metric">
+                            <dt>Гарантия салона</dt>
+                            <dd>{% if product.condition_code == 'NEW' %}12 мес.{% else %}6 мес.{% endif %}</dd>
+                        </div>
+                    </dl>
+                    <footer class="card-footer card-footer-buy">
+                        <form method="post" action="{% url 'salon:buy_product' product.id %}" class="buy-form">
+                            {% csrf_token %}
+                            <label class="buy-label">
+                                <span class="buy-label-text">Кол-во</span>
+                                <input type="number" name="quantity" class="buy-input" value="1" min="1" max="{{ product.stock }}" {% if not product.in_stock %}disabled{% endif %} required>
+                            </label>
+                            <label class="buy-label">
+                                <span class="buy-label-text">Имя</span>
+                                <input type="text" name="full_name" class="buy-input" placeholder="Необязательно">
+                            </label>
+                            <label class="buy-label">
+                                <span class="buy-label-text">Телефон</span>
+                                <input type="tel" name="phone" class="buy-input" placeholder="Необязательно">
+                            </label>
+                            <button type="submit" class="btn btn-primary btn-small" {% if not product.in_stock %}disabled{% endif %}>
+                                {% if product.in_stock %}Купить{% else %}Нет в наличии{% endif %}
+                            </button>
+                        </form>
+                    </footer>
+                </article>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="empty-state">
+            Товаров пока нет. Добавьте их в
+            <a href="/admin/salon/product/">админ-панели</a>
+            или выполните <span class="mono">python manage.py seed_demo</span>.
+        </p>
+    {% endif %}
+</section>
+{% endblock %}
